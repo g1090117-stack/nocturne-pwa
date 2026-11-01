@@ -11,56 +11,30 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <title>夜蘭 Nocturne Bar | 經典調酒與奢華夜生活</title>
-    <!-- Tailwind CSS & Font Awesome -->
+    <!-- 引入 Tailwind CSS 與 Font Awesome 圖示 -->
     <script src="https://tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cloudflare.com">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        gold: {
-                            50: '#fbf7ee', 100: '#f4eacf', 200: '#e9d59f',
-                            300: '#dbb966', 400: '#cf9e38', 500: '#b5832a',
-                            600: '#946320', 700: '#73461a', 800: '#5b3818',
-                            900: '#4b2e16', 950: '#2b1709'
-                        },
-                        dark: {
-                            50: '#f6f6f6', 100: '#e7e7e8', 200: '#cfcfd1',
-                            300: '#a9a9ad', 400: '#7e7e83', 500: '#626267',
-                            600: '#4d4d51', 700: '#3f3f43', 800: '#1a1a1e',
-                            900: '#111115', 950: '#0a0a0c'
-                        }
-                    },
-                    fontFamily: {
-                        serif: ['Playfair Display', 'Georgia', 'serif'],
-                        sans: ['Noto Sans TC', 'sans-serif']
-                    }
-                }
-            }
-        }
-    </script>
 </head>
-<body class="bg-dark-950 text-dark-100 font-sans antialiased selection:bg-gold-500 selection:text-dark-950">
+<body class="bg-[#0a0a0c] text-[#e7e7e8] antialiased selection:bg-[#b5832a] selection:text-[#0a0a0c]">
 
     <!-- 導覽列 Navigation -->
-    <nav class="fixed top-0 left-0 right-0 z-50 bg-dark-950/80 backdrop-blur-md border-b border-dark-900/50">
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-[#0a0a0c]/80 backdrop-blur-md border-b border-[#111115]/50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
                 <div class="flex items-center gap-3">
-                    <span class="text-2xl font-serif font-bold tracking-widest text-gold-400">N</span>
+                    <span class="text-2xl font-bold tracking-widest text-[#cf9e38]">N</span>
                     <div class="flex flex-col">
-                        <span class="text-lg font-serif font-bold tracking-wider text-gold-400 leading-none">NOCTURNE</span>
-                        <span class="text-[10px] tracking-[0.2em] text-dark-400 uppercase mt-1">Speakeasy & Lounge</span>
+                        <span class="text-lg font-bold tracking-wider text-[#cf9e38] leading-none">NOCTURNE</span>
+                        <span class="text-[10px] tracking-[0.2em] text-[#7e7e83] uppercase mt-1">Speakeasy & Lounge</span>
                     </div>
                 </div>
                 <div class="hidden md:flex items-center space-x-8 text-sm font-medium tracking-wide">
-                    <a href="#" class="text-gold-400 transition-colors">首頁</a>
-                    <a href="#story" class="text-dark-300 hover:text-gold-400 transition-colors">品牌故事</a>
-                    <a href="#menu" class="text-dark-300 hover:text-gold-400 transition-colors">特調酒單</a>
-                    <a href="#reservation" class="text-dark-300 hover:text-gold-400 transition-colors">線上訂位</a>
-                    <a href="#contact" class="text-dark-300 hover:text-gold-400 transition-colors">交通資訊</a>
-                    <a href="#reservation" class="bg-gold-500 hover:bg-gold-600 text-dark-950 px-5 py-2.5 rounded-full font-semibold transition-all shadow-lg shadow-gold-500/10 hover:shadow-gold-500/20 transform hover:-translate-y-0.5">立即預約</a>
+                    <a href="#" class="text-[#cf9e38] transition-colors">首頁</a>
+                    <a href="#story" class="text-[#a9a9ad] hover:text-[#cf9e38] transition-colors">品牌故事</a>
+                    <a href="#menu" class="text-[#a9a9ad] hover:text-[#cf9e38] transition-colors">特調酒單</a>
+                    <a href="#reservation" class="text-[#a9a9ad] hover:text-[#cf9e38] transition-colors">線上訂位</a>
+                    <a href="#contact" class="text-[#a9a9ad] hover:text-[#cf9e38] transition-colors">交通資訊</a>
+                    <a href="#reservation" class="bg-[#b5832a] hover:bg-[#cf9e38] text-[#0a0a0c] px-5 py-2.5 rounded-full font-semibold transition-all shadow-lg">立即預約</a>
                 </div>
             </div>
         </div>
@@ -70,21 +44,21 @@
     <header class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
         <div class="absolute inset-0 z-0">
             <img src="https://unsplash.com" alt="Bar Background" class="w-full h-full object-cover opacity-20 scale-105">
-            <div class="absolute inset-0 bg-gradient-to-t from-dark-950 via-dark-950/50 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0c] via-[#0a0a0c]/50 to-transparent"></div>
         </div>
         <div class="relative z-10 max-w-4xl mx-auto text-center px-4">
-            <span class="text-gold-400 tracking-[0.3em] uppercase text-xs sm:text-sm font-semibold inline-block mb-4">Welcome to Nocturne</span>
-            <h1 class="text-4xl sm:text-6xl md:text-7xl font-serif font-bold text-dark-50 tracking-wide mb-6 leading-tight">
+            <span class="text-[#cf9e38] tracking-[0.3em] uppercase text-xs sm:text-sm font-semibold inline-block mb-4">Welcome to Nocturne</span>
+            <h1 class="text-4xl sm:text-6xl md:text-7xl font-bold text-[#f6f6f6] tracking-wide mb-6 leading-tight">
                 夜幕低垂，<br class="sm:hidden">點燃微醺靈魂
             </h1>
-            <p class="text-dark-300 text-base sm:text-xl max-w-2xl mx-auto mb-10 leading-relaxed font-light">
+            <p class="text-[#a9a9ad] text-base sm:text-xl max-w-2xl mx-auto mb-10 leading-relaxed font-light">
                 在繁華都市的隱密角落，我們用手工調酒述說每滴故事。優雅、內斂、奢華，專屬於您的心靈避難所。
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <a href="#menu" class="w-full sm:w-auto bg-gold-500 hover:bg-gold-600 text-dark-950 px-8 py-4 rounded-full font-bold transition-all shadow-lg shadow-gold-500/20 transform hover:-translate-y-0.5 tracking-wider text-center">
+                <a href="#menu" class="w-full sm:w-auto bg-[#b5832a] hover:bg-[#cf9e38] text-[#0a0a0c] px-8 py-4 rounded-full font-bold transition-all shadow-lg tracking-wider text-center">
                     探索特調酒單
                 </a>
-                <a href="#reservation" class="w-full sm:w-auto bg-dark-900/80 hover:bg-dark-800 text-dark-100 border border-dark-700/50 px-8 py-4 rounded-full font-bold transition-all backdrop-blur-sm transform hover:-translate-y-0.5 tracking-wider text-center">
+                <a href="#reservation" class="w-full sm:w-auto bg-[#111115]/80 hover:bg-[#1a1a1e] text-[#e7e7e8] border border-[#3f3f43]/50 px-8 py-4 rounded-full font-bold transition-all backdrop-blur-sm tracking-wider text-center">
                     預訂專屬座位
                 </a>
             </div>
@@ -92,21 +66,21 @@
     </header>
 
     <!-- 品牌故事 Story Section -->
-    <section id="story" class="py-24 sm:py-32 border-t border-dark-900/30 bg-dark-900/10">
+    <section id="story" class="py-24 sm:py-32 border-t border-[#111115]/30 bg-[#111115]/10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <div class="space-y-6">
-                    <span class="text-gold-400 tracking-widest text-xs font-semibold uppercase">The Philosophy</span>
-                    <h2 class="text-3xl sm:text-4xl font-serif font-bold text-dark-50 tracking-wide">關於「夜蘭」</h2>
-                    <p class="text-dark-300 leading-relaxed font-light">
+                    <span class="text-[#cf9e38] tracking-widest text-xs font-semibold uppercase">The Philosophy</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-[#f6f6f6] tracking-wide">關於「夜蘭」</h2>
+                    <p class="text-[#a9a9ad] leading-relaxed font-light">
                         「夜蘭」取自深夜幽蘭之意。我們相信，一杯完美的調酒不僅僅是酒精的混合，更是調酒師與品飲者之間的無聲對話。在暗色調的奢華空間中，古典爵士樂低迴，讓您卸下一整天的疲憊。
                     </p>
-                    <p class="text-dark-300 leading-relaxed font-light">
+                    <p class="text-[#a9a9ad] leading-relaxed font-light">
                         每一款創作皆嚴選當季新鮮香草與自家浸泡烈酒，融匯古典調酒技法與現代分子料理概念，為您呈獻視覺與味決的雙重極致盛宴。
                     </p>
                 </div>
                 <div class="relative group">
-                    <div class="absolute inset-0 bg-gold-500/5 rounded-2xl transform translate-x-4 translate-y-4"></div>
+                    <div class="absolute inset-0 bg-[#b5832a]/5 rounded-2xl transform translate-x-4 translate-y-4"></div>
                     <img src="https://unsplash.com" alt="Bartender craft" class="relative z-10 w-full h-[400px] object-cover rounded-2xl shadow-2xl">
                 </div>
             </div>
@@ -114,40 +88,62 @@
     </section>
 
     <!-- 特調酒單 Menu Section -->
-    <section id="menu" class="py-24 sm:py-32 border-t border-dark-900/30">
+    <section id="menu" class="py-24 sm:py-32 border-t border-[#111115]/30">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-gold-400 tracking-widest text-xs font-semibold uppercase">Curated Menu</span>
-                <h2 class="text-3xl sm:text-4xl font-serif font-bold text-dark-50 tracking-wide mt-2 mb-4">經典與主打特調</h2>
-                <p class="text-dark-400 font-light">精心打造的風味地圖，從輕盈酸甜到厚實煙燻，皆為今晚的完美註解。</p>
+                <span class="text-[#cf9e38] tracking-widest text-xs font-semibold uppercase">Curated Menu</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-[#f6f6f6] tracking-wide mt-2 mb-4">經典與主打特調</h2>
+                <p class="text-[#7e7e83] font-light">精心打造的風味地圖，從輕盈酸甜到厚實煙燻，皆為今晚的完美註解。</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- 酒款 1 -->
-                <div class="bg-dark-900/30 border border-dark-900/50 rounded-2xl p-6 hover:border-gold-500/30 transition-all group">
-                    <div class="overflow-hidden rounded-xl mb-4 h-48 bg-dark-950">
+                <div class="bg-[#111115]/30 border border-[#111115]/50 rounded-2xl p-6 hover:border-[#b5832a]/30 transition-all group">
+                    <div class="overflow-hidden rounded-xl mb-4 h-48 bg-[#0a0a0c]">
                         <img src="https://unsplash.com" alt="Cocktail 1" class="w-full h-full object-cover opacity-80 group-hover:opacity-100">
                     </div>
                     <div class="flex justify-between items-baseline mb-2">
-                        <h3 class="text-lg font-serif font-bold text-dark-50 group-hover:text-gold-400 transition-colors">月下幻影 Phantom Moon</h3>
-                        <span class="text-gold-400 font-serif font-semibold">$450</span>
+                        <h3 class="text-lg font-bold text-[#f6f6f6] group-hover:text-[#cf9e38] transition-colors">月下幻影 Phantom Moon</h3>
+                        <span class="text-[#cf9e38] font-semibold">$450</span>
                     </div>
-                    <p class="text-sm text-dark-400 font-light leading-relaxed">
+                    <p class="text-sm text-[#7e7e83] font-light leading-relaxed">
                         自家浸泡琴酒 / 澄清茉莉綠茶 / 白可可香甜酒 / 澄花水。口感乾淨優雅，帶有隱密的東方花香。
                     </p>
                 </div>
                 <!-- 酒款 2 -->
-                <div class="bg-dark-900/30 border border-dark-900/50 rounded-2xl p-6 hover:border-gold-500/30 transition-all group">
-                    <div class="overflow-hidden rounded-xl mb-4 h-48 bg-dark-950">
+                <div class="bg-[#111115]/30 border border-[#111115]/50 rounded-2xl p-6 hover:border-[#b5832a]/30 transition-all group">
+                    <div class="overflow-hidden rounded-xl mb-4 h-48 bg-[#0a0a0c]">
                         <img src="https://unsplash.com" alt="Cocktail 2" class="w-full h-full object-cover opacity-80 group-hover:opacity-100">
                     </div>
                     <div class="flex justify-between items-baseline mb-2">
-                        <h3 class="text-lg font-serif font-bold text-dark-50 group-hover:text-gold-400 transition-colors">煙草與泥煤 Smoke & Peat</h3>
-                        <span class="text-gold-400 font-serif font-semibold">$500</span>
+                        <h3 class="text-lg font-bold text-[#f6f6f6] group-hover:text-[#cf9e38] transition-colors">煙草與泥煤 Smoke & Peat</h3>
+                        <span class="text-[#cf9e38] font-semibold">$500</span>
                     </div>
-                    <p class="text-sm text-dark-400 font-light leading-relaxed">
+                    <p class="text-sm text-[#7e7e83] font-light leading-relaxed">
                         艾雷島威士忌 / 義大利苦艾酒 / 煙燻烏梅汁 / 秘魯苦精。成熟男人的煙燻皮革調性，層次深邃。
                     </p>
                 </div>
                 <!-- 酒款 3 -->
-                <div class="bg-dark-900/30 border border-dark-900/50 rounded-2xl p-6 hover:border-gold-500/30 transition-all group">
-                    <div class="overflow-hidden rounded-xl mb-4 h-48 bg-dark-950">
+                <div class="bg-[#111115]/30 border border-[#111115]/50 rounded-2xl p-6 hover:border-[#b5832a]/30 transition-all group">
+                    <div class="overflow-hidden rounded-xl mb-4 h-48 bg-[#0a0a0c]">
+                        <img src="https://unsplash.com" alt="Cocktail 3" class="w-full h-full object-cover opacity-80 group-hover:opacity-100">
+                    </div>
+                    <div class="flex justify-between items-baseline mb-2">
+                        <h3 class="text-lg font-bold text-[#f6f6f6] group-hover:text-[#cf9e38] transition-colors">夜蘭特調 Nocturne Orchid</h3>
+                        <span class="text-[#cf9e38] font-semibold">$480</span>
+                    </div>
+                    <p class="text-sm text-[#7e7e83] font-light leading-relaxed">
+                        自製蘭花伏特加 / 新鮮百香果 / 羅勒糖漿 / 起泡白葡萄酒。熱帶酸甜與草本植物的完美撞擊。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 線上訂位 Section -->
+    <section id="reservation" class="py-24 sm:py-32 border-t border-[#111115]/30 bg-[#111115]/20">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6">
+            <div class="text-center mb-12">
+                <span class="text-[#cf9e38] tracking-widest text-xs font-semibold uppercase">Booking</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-[#f6f6f6] tracking-wide mt-2 mb-4">預訂專屬微醺時光</h2>
+                <p class="text-[#7e7e83] font-light text-sm">座位有限，建議提前線上預約。我們將為您保留 15 分鐘。</p>
+            </div>
