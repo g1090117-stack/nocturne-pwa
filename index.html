@@ -23,8 +23,8 @@
         .btn-reserve { background: #b5832a; color: #0a0a0c; padding: 10px 24px; border-radius: 25px; font-weight: bold; }
         .btn-reserve:hover { background: #cf9e38; }
 
-        /* 主視覺 - 改用純網頁渲染的微醺漸層底色，保證能百分之百顯現 */
-        header { position: relative; min-height: calc(100vh - 80px); display: flex; align-items: center; justify-content: center; text-align: center; padding: 40px 20px; overflow: hidden; background: linear-gradient(135deg, #16121e 0%, #0a0a0c 60%, #1a1510 100%); border-bottom: 1px solid rgba(181, 131, 42, 0.1); }
+        /* 主視覺 */
+        header { position: relative; min-height: calc(100vh - 80px); display: flex; align-items: center; justify-content: center; text-align: center; padding: 40px 20px; overflow: hidden; background: linear-gradient(rgba(10,10,12,0.75), #0a0a0c), url('https://pexels.com') no-repeat center center/cover; }
         .hero-content { max-width: 800px; z-index: 10; }
         .welcome { color: #cf9e38; letter-spacing: 4px; font-size: 14px; font-weight: 600; text-transform: uppercase; margin-bottom: 16px; }
         h1 { font-size: 56px; font-weight: bold; color: #f6f6f6; margin-bottom: 24px; line-height: 1.2; }
@@ -45,19 +45,13 @@
         .story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
         .story-text h3 { font-size: 28px; color: #f6f6f6; margin-bottom: 20px; }
         .story-text p { color: #a9a9ad; margin-bottom: 20px; font-weight: 300; }
-        
-        /* 故事區塊占位圖：改用 CSS 渲染的奢華黑金圖形，不用下載外部圖片 */
-        .story-placeholder { width: 100%; height: 400px; background: linear-gradient(45deg, #111115, #1c1710); border: 1px solid #b5832a; border-radius: 16px; display: flex; align-items: center; justify-content: center; color: #b5832a; font-size: 48px; box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
+        .story-img img { width: 100%; height: 400px; object-fit: cover; border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
 
         /* 酒單 */
         .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; }
         .menu-item { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 20px; padding: 24px; transition: border 0.3s; }
         .menu-item:hover { border-color: rgba(181, 131, 42, 0.3); }
-        
-        /* 酒單占位圖：改用圖示風格的深色基底，100% 正常顯示 */
-        .menu-pic-placeholder { width: 100%; height: 200px; background: linear-gradient(to bottom, #1a1a22, #111115); border-radius: 12px; margin-bottom: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #cf9e38; font-size: 14px; font-weight: bold; border: 1px solid rgba(255,255,255,0.02); }
-        .menu-pic-placeholder span { font-size: 32px; margin-bottom: 8px; }
-
+        .menu-img { width: 100%; height: 220px; object-fit: cover; border-radius: 12px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.05); }
         .menu-meta { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px; }
         .menu-meta h3 { font-size: 18px; color: #f6f6f6; }
         .menu-meta .price { color: #cf9e38; font-weight: bold; }
@@ -106,7 +100,7 @@
         <div class="hero-content">
             <p class="welcome">Welcome to Nocturne</p>
             <h1>夜幕低垂，<br>點燃微醺靈魂</h1>
-            <p class="hero-p">在繁華都市的隱密角落，我們用手工調酒述說每滴故事。優雅、內斂、奢華，專屬於您的心靈避難所。</p>
+            <p class="hero-p">在繁華都市的隱密角落，我們用手工調酒述說每滴故事。優雅、內斂、奢華，專專屬於您的心靈避難所。</p>
             <div class="hero-btns">
                 <a href="#menu" class="btn-gold">探索特調酒單</a>
                 <a href="#reservation" class="btn-outline">預訂專屬座位</a>
@@ -120,11 +114,11 @@
             <div class="story-text">
                 <div style="margin-bottom:12px;"><span>The Philosophy</span></div>
                 <h3>關於「夜蘭」</h3>
-                <p>「夜蘭」取自深夜幽蘭之意。我們相信，一杯完美的調酒不僅僅是酒精的混合，幕後更是調酒師與品飲者之間的無聲對話。在暗色調的奢華空間中，古典爵士樂低迴，讓您卸下一整天的疲憊。</p>
+                <p>「夜蘭」取自深夜幽蘭之意。我們相信，一杯完美的調酒不僅僅是酒精的混合，更是調酒師與品飲者之間的無聲對話。在暗色調的奢華空間中，古典爵士樂低迴，讓您卸下一整天的疲憊。</p>
                 <p>每一款創作皆嚴選當季新鮮香草與自家浸泡烈酒，融匯古典調酒技法與現代分子料理概念，為您呈獻視覺與味覺的雙重極致盛宴。</p>
             </div>
-            <div class="story-placeholder">
-                🍷
+            <div class="story-img">
+                <img src="https://pexels.com" alt="Bartender">
             </div>
         </div>
     </section>
@@ -137,25 +131,25 @@
         </div>
         <div class="menu-grid">
             <div class="menu-item">
-                <div class="menu-pic-placeholder"><span>🍸</span>Phantom Moon</div>
+                <img src="https://pexels.com" class="menu-img" alt="Cocktail 1">
                 <div class="menu-meta">
-                    <h3>月下幻影</h3>
+                    <h3>月下幻影 Phantom Moon</h3>
                     <span class="price">$450</span>
                 </div>
                 <p class="menu-desc">自家浸泡琴酒 / 澄清茉莉綠茶 / 白可可香甜酒 / 澄花水。口感乾淨優雅，帶有隱密的東方花香。</p>
             </div>
             <div class="menu-item">
-                <div class="menu-pic-placeholder"><span>🥃</span>Smoke & Peat</div>
+                <img src="https://pexels.com" class="menu-img" alt="Cocktail 2">
                 <div class="menu-meta">
-                    <h3>煙草與泥煤</h3>
+                    <h3>煙草與泥煤 Smoke & Peat</h3>
                     <span class="price">$500</span>
                 </div>
                 <p class="menu-desc">艾雷島威士忌 / 義大利苦艾酒 / 煙燻烏梅汁 / 秘魯苦精。成熟男人的煙燻皮革調性，層次深邃。</p>
             </div>
             <div class="menu-item">
-                <div class="menu-pic-placeholder"><span>🍹</span>Nocturne Orchid</div>
+                <img src="https://pexels.com" class="menu-img" alt="Cocktail 3">
                 <div class="menu-meta">
-                    <h3>夜蘭特調</h3>
+                    <h3>夜蘭特調 Nocturne Orchid</h3>
                     <span class="price">$480</span>
                 </div>
                 <p class="menu-desc">自製蘭花伏特加 / 新鮮百香果 / 羅勒糖漿 / 起泡白葡萄酒。熱帶酸甜與草本植物的完美撞擊。</p>
@@ -179,3 +173,6 @@
                     <label>電話號碼</label>
                     <input type="tel" required placeholder="手機號碼">
                 </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
