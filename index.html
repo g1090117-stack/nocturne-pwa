@@ -23,8 +23,8 @@
         .btn-reserve { background: #b5832a; color: #0a0a0c; padding: 10px 24px; border-radius: 25px; font-weight: bold; }
         .btn-reserve:hover { background: #cf9e38; }
 
-        /* 主視覺 */
-        header { position: relative; min-height: calc(100vh - 80px); display: flex; align-items: center; justify-content: center; text-align: center; padding: 40px 20px; overflow: hidden; background: linear-gradient(rgba(10,10,12,0.75), #0a0a0c), url('https://pexels.com') no-repeat center center/cover; }
+        /* 主視覺 - 高奢微醺漸層底色 */
+        header { position: relative; min-height: calc(100vh - 80px); display: flex; align-items: center; justify-content: center; text-align: center; padding: 40px 20px; overflow: hidden; background: linear-gradient(135deg, #16121e 0%, #0a0a0c 60%, #1a1510 100%); border-bottom: 1px solid rgba(181, 131, 42, 0.1); }
         .hero-content { max-width: 800px; z-index: 10; }
         .welcome { color: #cf9e38; letter-spacing: 4px; font-size: 14px; font-weight: 600; text-transform: uppercase; margin-bottom: 16px; }
         h1 { font-size: 56px; font-weight: bold; color: #f6f6f6; margin-bottom: 24px; line-height: 1.2; }
@@ -45,13 +45,18 @@
         .story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
         .story-text h3 { font-size: 28px; color: #f6f6f6; margin-bottom: 20px; }
         .story-text p { color: #a9a9ad; margin-bottom: 20px; font-weight: 300; }
-        .story-img img { width: 100%; height: 400px; object-fit: cover; border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
+        
+        /* 故事區塊內建繪圖面板 */
+        .story-svg-box { width: 100%; height: 400px; background: #121216; border: 1px solid rgba(181, 131, 42, 0.3); border-radius: 16px; display: flex; align-items: center; justify-content: center; box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
 
         /* 酒單 */
         .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; }
         .menu-item { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 20px; padding: 24px; transition: border 0.3s; }
         .menu-item:hover { border-color: rgba(181, 131, 42, 0.3); }
-        .menu-img { width: 100%; height: 220px; object-fit: cover; border-radius: 12px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.05); }
+        
+        /* 酒單內建繪圖面板 */
+        .menu-svg-box { width: 100%; height: 220px; background: #121216; border-radius: 12px; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.03); }
+
         .menu-meta { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px; }
         .menu-meta h3 { font-size: 18px; color: #f6f6f6; }
         .menu-meta .price { color: #cf9e38; font-weight: bold; }
@@ -82,7 +87,7 @@
     <!-- 導覽列 -->
     <nav>
         <div class="logo">
-            <span class="logo-n">🍸</span>
+            <span style="font-size:24px;">🍸</span>
             <span class="logo-text">NOCTURNE</span>
         </div>
         <div class="nav-links">
@@ -100,7 +105,7 @@
         <div class="hero-content">
             <p class="welcome">Welcome to Nocturne</p>
             <h1>夜幕低垂，<br>點燃微醺靈魂</h1>
-            <p class="hero-p">在繁華都市的隱密角落，我們用手工調酒述說每滴故事。優雅、內斂、奢華，專專屬於您的心靈避難所。</p>
+            <p class="hero-p">在繁華都市的隱密角落，我們用手工調酒述說每滴故事。優雅、內斂、奢華，專屬於您的心靈避難所。</p>
             <div class="hero-btns">
                 <a href="#menu" class="btn-gold">探索特調酒單</a>
                 <a href="#reservation" class="btn-outline">預訂專屬座位</a>
@@ -117,8 +122,13 @@
                 <p>「夜蘭」取自深夜幽蘭之意。我們相信，一杯完美的調酒不僅僅是酒精的混合，更是調酒師與品飲者之間的無聲對話。在暗色調的奢華空間中，古典爵士樂低迴，讓您卸下一整天的疲憊。</p>
                 <p>每一款創作皆嚴選當季新鮮香草與自家浸泡烈酒，融匯古典調酒技法與現代分子料理概念，為您呈獻視覺與味覺的雙重極致盛宴。</p>
             </div>
-            <div class="story-img">
-                <img src="https://pexels.com" alt="Bartender">
+            <!-- 內建質感網頁圖形：精緻調酒杯與瓶子 -->
+            <div class="story-svg-box">
+                <svg width="200" height="200" viewBox="0 0 100 100">
+                    <path d="M40 70 L60 70 M50 70 L50 50 M35 25 L65 25 L50 50 Z" fill="none" stroke="#cf9e38" stroke-width="2" stroke-linejoin="round"/>
+                    <line x1="38" y1="30" x2="62" y2="30" stroke="#b5832a" stroke-width="2"/>
+                    <circle cx="48" cy="20" r="2" fill="#cf9e38"/>
+                </svg>
             </div>
         </div>
     </section>
@@ -131,7 +141,13 @@
         </div>
         <div class="menu-grid">
             <div class="menu-item">
-                <img src="https://pexels.com" class="menu-img" alt="Cocktail 1">
+                <!-- 內建圖形 1 -->
+                <div class="menu-svg-box">
+                    <svg width="100" height="100" viewBox="0 0 100 100">
+                        <path d="M35 30 L65 30 L50 55 Z M50 55 L50 80 M40 80 L60 80" fill="none" stroke="#cf9e38" stroke-width="2"/>
+                        <circle cx="45" cy="40" r="3" fill="#b5832a"/>
+                    </svg>
+                </div>
                 <div class="menu-meta">
                     <h3>月下幻影 Phantom Moon</h3>
                     <span class="price">$450</span>
@@ -139,7 +155,13 @@
                 <p class="menu-desc">自家浸泡琴酒 / 澄清茉莉綠茶 / 白可可香甜酒 / 澄花水。口感乾淨優雅，帶有隱密的東方花香。</p>
             </div>
             <div class="menu-item">
-                <img src="https://pexels.com" class="menu-img" alt="Cocktail 2">
+                <!-- 內建圖形 2 -->
+                <div class="menu-svg-box">
+                    <svg width="100" height="100" viewBox="0 0 100 100">
+                        <path d="M40 35 L60 35 L60 75 L40 75 Z M42 75 L58 75 M50 35 L50 25 M45 25 L55 25" fill="none" stroke="#cf9e38" stroke-width="2"/>
+                        <line x1="45" y1="50" x2="55" y2="50" stroke="#b5832a" stroke-width="2"/>
+                    </svg>
+                </div>
                 <div class="menu-meta">
                     <h3>煙草與泥煤 Smoke & Peat</h3>
                     <span class="price">$500</span>
@@ -147,32 +169,6 @@
                 <p class="menu-desc">艾雷島威士忌 / 義大利苦艾酒 / 煙燻烏梅汁 / 秘魯苦精。成熟男人的煙燻皮革調性，層次深邃。</p>
             </div>
             <div class="menu-item">
-                <img src="https://pexels.com" class="menu-img" alt="Cocktail 3">
-                <div class="menu-meta">
-                    <h3>夜蘭特調 Nocturne Orchid</h3>
-                    <span class="price">$480</span>
-                </div>
-                <p class="menu-desc">自製蘭花伏特加 / 新鮮百香果 / 羅勒糖漿 / 起泡白葡萄酒。熱帶酸甜與草本植物的完美撞擊。</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- 線上訂位 -->
-    <section id="reservation">
-        <div class="section-title">
-            <span>Booking</span>
-            <h2>預訂專屬微醺時光</h2>
-        </div>
-        <form onsubmit="event.preventDefault(); alert('感謝您的預約！確認簡訊將於稍後發送。');">
-            <div class="form-row">
-                <div class="form-group">
-                    <label>姓名</label>
-                    <input type="text" required placeholder="請輸入姓名">
-                </div>
-                <div class="form-group">
-                    <label>電話號碼</label>
-                    <input type="tel" required placeholder="手機號碼">
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group">
+                <!-- 內建圖形 3 -->
+                <div class="menu-svg-box">
+                    <svg width="100" height="100" viewBox="0 0 100 100">
