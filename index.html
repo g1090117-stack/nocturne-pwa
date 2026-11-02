@@ -1,3 +1,151 @@
+#!/usr/bin/env python3
+"""
+夜闌 Nocturne Bar — PWA 圖示產生器
+-----------------------------------
+用法：
+    pip install pillow
+    python gen_icons.py
+
+會在本檔案同一層的 icons/ 資料夾輸出：
+    icon-{72,96,128,144,152,192,384,512}.png   一般圖示 (purpose: any，圓角、角落透明)
+    maskable-{192,512}.png                     可遮罩圖示 (purpose: maskable，滿版、內容縮在安全區)
+    apple-touch-icon.png (180x180)             iOS 主畫面圖示 (滿版、不透明)
+    favicon-16.png / favicon-32.png / favicon.ico
+
+想換造型只需要改下方「設計參數」，其餘不用動。
+"""
+from pathlib import Path
+
+from PIL import Image, ImageChops, ImageDraw, ImageOps
+
+# ───────────── 設計參數 ─────────────
+BG = "#0a0a0c"               # 背景（與 manifest theme_color 一致）
+GLOW = (245, 158, 11)        # 背景中心微光（琥珀色）
+BRASS_TOP = "#f3dfaa"        # 黃銅漸層：上
+BRASS_MID = "#c5a059"        # 黃銅漸層：中
+BRASS_BOT = "#8a6a2c"        # 黃銅漸層：下
+
+MASTER = 2048                # 母圖尺寸（超取樣，縮小後邊緣較平滑）
+OUT_DIR = Path(__file__).resolve().parent / "icons"
+
+ANY_SIZES = [72, 96, 128, 144, 152, 192, 384, 512]
+MASKABLE_SIZES = [192, 512]
+
+
+# ───────────── 繪圖工具 ─────────────
+def brass_fill(size: int) -> Image.Image:
+    """由上到下的黃銅漸層（RGB）。"""
+    grad = Image.linear_gradient("L").resize((size, size), Image.BILINEAR)
+    return ImageOps.colorize(grad, black=BRASS_TOP, mid=BRASS_MID, white=BRASS_BOT)
+
+
+def glow_layer(size: int, strength: int = 55) -> Image.Image:
+    """背景中央的琥珀色柔光（RGBA）。"""
+    radial = Image.radial_gradient("L").resize((size, size), Image.BILINEAR)  # 中心黑 → 邊緣白
+    alpha = ImageOps.invert(radial).point(lambda v: int(v * strength / 255))
+    layer = Image.new("RGBA", (size, size), GLOW + (0,))
+    layer.putalpha(alpha)
+    return layer
+
+
+def n_polygons(cx: float, cy: float, height: float):
+    """以 (cx, cy) 為中心、字高 height 的襯線體 N（細直線、粗斜線）。"""
+    h = height / 2
+    w = height * 0.43          # 半寬
+    thin = height * 0.062      # 細筆劃
+    diag = height * 0.21       # 斜線水平寬度
+    ser_h = height * 0.034     # 襯線厚度
+    ser_l = height * 0.11      # 襯線半長
+
+    def rect(x0, y0, x1, y1):
+        return [(cx + x0, cy + y0), (cx + x1, cy + y0), (cx + x1, cy + y1), (cx + x0, cy + y1)]
+
+    left_x = -w + height * 0.05
+    right_x = w - height * 0.05
+    polys = [
+        rect(left_x, -h, left_x + thin, h),                                    # 左直線
+        rect(right_x - thin, -h, right_x, h),                                  # 右直線
+        [(cx - w + height * 0.02, cy - h), (cx - w + height * 0.02 + diag, cy - h),
+         (cx + w - height * 0.02, cy + h), (cx + w - height * 0.02 - diag, cy + h)],  # 粗斜線
+        rect(left_x - ser_l, -h, left_x + thin + ser_l, -h + ser_h),           # 左上襯線
+        rect(left_x - ser_l, h - ser_h, left_x + thin + ser_l, h),             # 左下襯線
+        rect(right_x - thin - ser_l, -h, right_x + ser_l, -h + ser_h),         # 右上襯線
+        rect(right_x - thin - ser_l, h - ser_h, right_x + ser_l, h),           # 右下襯線
+    ]
+    return polys
+
+
+def make_master(maskable: bool, rounded: bool) -> Image.Image:
+    S = MASTER
+    img = Image.new("RGBA", (S, S), BG)
+    img.alpha_composite(glow_layer(S))
+
+    # 內容半徑：maskable 需落在中央 80% 圓內（安全區），一般圖示可大一點
+    ring_r = S * (0.30 if maskable else 0.385)
+    c = S / 2
+
+    # 黃銅外環 + 細內環
+    ring_mask = Image.new("L", (S, S), 0)
+    d = ImageDraw.Draw(ring_mask)
+    ring_w = S * 0.018
+    d.ellipse([c - ring_r, c - ring_r, c + ring_r, c + ring_r], outline=255, width=int(ring_w))
+    inner_r = ring_r - S * 0.032
+    d.ellipse([c - inner_r, c - inner_r, c + inner_r, c + inner_r], outline=110, width=max(2, int(S * 0.005)))
+
+    # N 字
+    n_mask = Image.new("L", (S, S), 0)
+    nd = ImageDraw.Draw(n_mask)
+    for poly in n_polygons(c, c + S * 0.004, ring_r * 1.08):
+        nd.polygon(poly, fill=255)
+
+    mark_mask = ImageChops.lighter(ring_mask, n_mask)
+    img.paste(brass_fill(S), (0, 0), mark_mask)
+
+    # 外圍圓角（僅一般圖示；maskable / apple 保持滿版）
+    if rounded:
+        corner = Image.new("L", (S, S), 0)
+        ImageDraw.Draw(corner).rounded_rectangle([0, 0, S - 1, S - 1], radius=int(S * 0.22), fill=255)
+        img.putalpha(ImageChops.multiply(img.getchannel("A"), corner))
+    return img
+
+
+def save(img: Image.Image, size: int, name: str, opaque: bool = False):
+    out = img.resize((size, size), Image.LANCZOS)
+    if opaque:
+        out = out.convert("RGB")
+    out.save(OUT_DIR / name, optimize=True)
+    print(f"  ✓ {name:<24} {size}x{size}")
+
+
+def main():
+    OUT_DIR.mkdir(exist_ok=True)
+    print(f"輸出資料夾：{OUT_DIR}")
+
+    any_master = make_master(maskable=False, rounded=True)
+    for s in ANY_SIZES:
+        save(any_master, s, f"icon-{s}.png")
+
+    mask_master = make_master(maskable=True, rounded=False)
+    for s in MASKABLE_SIZES:
+        save(mask_master, s, f"maskable-{s}.png", opaque=True)
+
+    # iOS：系統會自己套圓角，所以用滿版不透明圖（內容比 maskable 稍大）
+    apple_master = make_master(maskable=False, rounded=False)
+    save(apple_master, 180, "apple-touch-icon.png", opaque=True)
+
+    # Favicon
+    save(any_master, 32, "favicon-32.png")
+    save(any_master, 16, "favicon-16.png")
+    any_master.resize((256, 256), Image.LANCZOS).save(
+        OUT_DIR / "favicon.ico", sizes=[(16, 16), (32, 32), (48, 48)]
+    )
+    print("  ✓ favicon.ico")
+    print("完成。")
+
+
+if __name__ == "__main__":
+    main()
+
 <!DOCTYPE html>
 <html lang="zh-TW" class="dark scroll-smooth">
 <head>
@@ -217,12 +365,14 @@
         </div>
     </nav>
 
-        <!-- Background Overlay 遮罩 -->
-        <div class="absolute inset-0 -z-10" style="position: absolute; inset: 0; width: 100%; height: 100%; overflow: hidden;">
-            <img fetchpriority="high" decoding="async" src="https://unsplash.com" alt="Bar Interior" class="w-full h-full object-cover opacity-60" style="width: 100%; height: 100%; object-fit: cover;">
-            <div class="absolute inset-0 bg-zinc-950/80" style="position: absolute; inset: 0; background-color: rgba(9, 9, 11, 0.85);"></div>
+    <!-- 主視覺 Banner (Hero Section) -->
+    <section id="hero" class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+        <!-- Background Overlay with Amber Glow -->
+        <div class="absolute inset-0 z-0">
+            <img fetchpriority="high" decoding="async" src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?q=80&w=1920&auto=format&fit=crop" alt="Bar Interior" class="w-full h-full object-cover opacity-25 scale-105 animate-pulse" style="animation-duration: 8s;">
+            <div class="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/70 to-transparent"></div>
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-amber-500/10 via-transparent to-transparent"></div>
         </div>
-
 
         <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
             <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs tracking-widest uppercase mb-6">
@@ -842,154 +992,6 @@
     </script>
 </body>
 </html>
-#!/usr/bin/env python3
-"""
-夜闌 Nocturne Bar — PWA 圖示產生器
------------------------------------
-用法：
-    pip install pillow
-    python gen_icons.py
-
-會在本檔案同一層的 icons/ 資料夾輸出：
-    icon-{72,96,128,144,152,192,384,512}.png   一般圖示 (purpose: any，圓角、角落透明)
-    maskable-{192,512}.png                     可遮罩圖示 (purpose: maskable，滿版、內容縮在安全區)
-    apple-touch-icon.png (180x180)             iOS 主畫面圖示 (滿版、不透明)
-    favicon-16.png / favicon-32.png / favicon.ico
-
-想換造型只需要改下方「設計參數」，其餘不用動。
-"""
-from pathlib import Path
-
-from PIL import Image, ImageChops, ImageDraw, ImageOps
-
-# ───────────── 設計參數 ─────────────
-BG = "#0a0a0c"               # 背景（與 manifest theme_color 一致）
-GLOW = (245, 158, 11)        # 背景中心微光（琥珀色）
-BRASS_TOP = "#f3dfaa"        # 黃銅漸層：上
-BRASS_MID = "#c5a059"        # 黃銅漸層：中
-BRASS_BOT = "#8a6a2c"        # 黃銅漸層：下
-
-MASTER = 2048                # 母圖尺寸（超取樣，縮小後邊緣較平滑）
-OUT_DIR = Path(__file__).resolve().parent / "icons"
-
-ANY_SIZES = [72, 96, 128, 144, 152, 192, 384, 512]
-MASKABLE_SIZES = [192, 512]
-
-
-# ───────────── 繪圖工具 ─────────────
-def brass_fill(size: int) -> Image.Image:
-    """由上到下的黃銅漸層（RGB）。"""
-    grad = Image.linear_gradient("L").resize((size, size), Image.BILINEAR)
-    return ImageOps.colorize(grad, black=BRASS_TOP, mid=BRASS_MID, white=BRASS_BOT)
-
-
-def glow_layer(size: int, strength: int = 55) -> Image.Image:
-    """背景中央的琥珀色柔光（RGBA）。"""
-    radial = Image.radial_gradient("L").resize((size, size), Image.BILINEAR)  # 中心黑 → 邊緣白
-    alpha = ImageOps.invert(radial).point(lambda v: int(v * strength / 255))
-    layer = Image.new("RGBA", (size, size), GLOW + (0,))
-    layer.putalpha(alpha)
-    return layer
-
-
-def n_polygons(cx: float, cy: float, height: float):
-    """以 (cx, cy) 為中心、字高 height 的襯線體 N（細直線、粗斜線）。"""
-    h = height / 2
-    w = height * 0.43          # 半寬
-    thin = height * 0.062      # 細筆劃
-    diag = height * 0.21       # 斜線水平寬度
-    ser_h = height * 0.034     # 襯線厚度
-    ser_l = height * 0.11      # 襯線半長
-
-    def rect(x0, y0, x1, y1):
-        return [(cx + x0, cy + y0), (cx + x1, cy + y0), (cx + x1, cy + y1), (cx + x0, cy + y1)]
-
-    left_x = -w + height * 0.05
-    right_x = w - height * 0.05
-    polys = [
-        rect(left_x, -h, left_x + thin, h),                                    # 左直線
-        rect(right_x - thin, -h, right_x, h),                                  # 右直線
-        [(cx - w + height * 0.02, cy - h), (cx - w + height * 0.02 + diag, cy - h),
-         (cx + w - height * 0.02, cy + h), (cx + w - height * 0.02 - diag, cy + h)],  # 粗斜線
-        rect(left_x - ser_l, -h, left_x + thin + ser_l, -h + ser_h),           # 左上襯線
-        rect(left_x - ser_l, h - ser_h, left_x + thin + ser_l, h),             # 左下襯線
-        rect(right_x - thin - ser_l, -h, right_x + ser_l, -h + ser_h),         # 右上襯線
-        rect(right_x - thin - ser_l, h - ser_h, right_x + ser_l, h),           # 右下襯線
-    ]
-    return polys
-
-
-def make_master(maskable: bool, rounded: bool) -> Image.Image:
-    S = MASTER
-    img = Image.new("RGBA", (S, S), BG)
-    img.alpha_composite(glow_layer(S))
-
-    # 內容半徑：maskable 需落在中央 80% 圓內（安全區），一般圖示可大一點
-    ring_r = S * (0.30 if maskable else 0.385)
-    c = S / 2
-
-    # 黃銅外環 + 細內環
-    ring_mask = Image.new("L", (S, S), 0)
-    d = ImageDraw.Draw(ring_mask)
-    ring_w = S * 0.018
-    d.ellipse([c - ring_r, c - ring_r, c + ring_r, c + ring_r], outline=255, width=int(ring_w))
-    inner_r = ring_r - S * 0.032
-    d.ellipse([c - inner_r, c - inner_r, c + inner_r, c + inner_r], outline=110, width=max(2, int(S * 0.005)))
-
-    # N 字
-    n_mask = Image.new("L", (S, S), 0)
-    nd = ImageDraw.Draw(n_mask)
-    for poly in n_polygons(c, c + S * 0.004, ring_r * 1.08):
-        nd.polygon(poly, fill=255)
-
-    mark_mask = ImageChops.lighter(ring_mask, n_mask)
-    img.paste(brass_fill(S), (0, 0), mark_mask)
-
-    # 外圍圓角（僅一般圖示；maskable / apple 保持滿版）
-    if rounded:
-        corner = Image.new("L", (S, S), 0)
-        ImageDraw.Draw(corner).rounded_rectangle([0, 0, S - 1, S - 1], radius=int(S * 0.22), fill=255)
-        img.putalpha(ImageChops.multiply(img.getchannel("A"), corner))
-    return img
-
-
-def save(img: Image.Image, size: int, name: str, opaque: bool = False):
-    out = img.resize((size, size), Image.LANCZOS)
-    if opaque:
-        out = out.convert("RGB")
-    out.save(OUT_DIR / name, optimize=True)
-    print(f"  ✓ {name:<24} {size}x{size}")
-
-
-def main():
-    OUT_DIR.mkdir(exist_ok=True)
-    print(f"輸出資料夾：{OUT_DIR}")
-
-    any_master = make_master(maskable=False, rounded=True)
-    for s in ANY_SIZES:
-        save(any_master, s, f"icon-{s}.png")
-
-    mask_master = make_master(maskable=True, rounded=False)
-    for s in MASKABLE_SIZES:
-        save(mask_master, s, f"maskable-{s}.png", opaque=True)
-
-    # iOS：系統會自己套圓角，所以用滿版不透明圖（內容比 maskable 稍大）
-    apple_master = make_master(maskable=False, rounded=False)
-    save(apple_master, 180, "apple-touch-icon.png", opaque=True)
-
-    # Favicon
-    save(any_master, 32, "favicon-32.png")
-    save(any_master, 16, "favicon-16.png")
-    any_master.resize((256, 256), Image.LANCZOS).save(
-        OUT_DIR / "favicon.ico", sizes=[(16, 16), (32, 32), (48, 48)]
-    )
-    print("  ✓ favicon.ico")
-    print("完成。")
-
-
-if __name__ == "__main__":
-    main()
-
 {
   "id": "./",
   "name": "夜闌 Nocturne Bar | 經典調酒與奢華夜生活",
