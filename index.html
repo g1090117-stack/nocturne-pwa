@@ -2,150 +2,107 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <meta name="description" content="夜蘭 Nocturne Bar - 經典手工調酒與奢華微醺空間。瀏覽酒單、線上訂位、查看營業資訊。">
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#0a0a0c">
-    <title>夜蘭 Nocturne Bar | 經典調酒與奢華夜生活</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>夜幕調酒 Nocturne Bar</title>
+    <script src="https://jsdelivr.net"></script>
     <style>
-        /* 核心內建排版樣式 */
         * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background-image: url("https://unsplash.com"); background-size: cover; background-position: center; background-attachment: fixed; background-color: #0c0d0e; color: #e7e7e8; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; padding-top: 80px; }
-
-
-        
-        /* 導覽列 */
-        nav { position: fixed; top: 0; left: 0; right: 0; height: 80px; background: rgba(10, 10, 12, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.05); z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; }
-        .logo { display: flex; align-items: center; gap: 12px; }
-        .logo-n { font-size: 28px; font-weight: bold; color: #cf9e38; }
-        .logo-text { font-size: 18px; font-weight: bold; color: #cf9e38; letter-spacing: 2px; }
+        body { background-image: url("https://unsplash.com"); background-size: cover; background-position: center; background-attachment: fixed; background-color: #0c0d0e; color: #e7e7e8; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; padding-top: 80px; }
+        nav { position: fixed; top: 0; left: 0; right: 0; height: 80px; background: rgba(10, 10, 12, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05); z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; }
+        .logo { display: flex; align-items: center; gap: 12px; font-size: 24px; font-weight: bold; color: #f59e0b; letter-spacing: 2px; }
         .nav-links { display: flex; gap: 32px; font-size: 14px; align-items: center; }
-        .nav-links a:hover { color: #cf9e38; }
-        .btn-reserve { background: #b5832a; color: #0a0a0c; padding: 10px 24px; border-radius: 25px; font-weight: bold; }
-        .btn-reserve:hover { background: #cf9e38; }
-
-        /* 主視覺 - 高奢微醺漸層底色 */
-     header { position: relative; min-height: calc(100vh - 80px); display: flex; align-items: center; justify-content: center; text-align: center; padding: 40px 20px; overflow: hidden; background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)), url("https://unsplash.com"); background-size: cover; background-position: center; border-bottom: 1px solid rgba(181, 131, 42, 0.1); }
-
-
-
-        .hero-content { max-width: 800px; z-index: 10; }
-        .welcome { color: #cf9e38; letter-spacing: 4px; font-size: 14px; font-weight: 600; text-transform: uppercase; margin-bottom: 16px; }
-        h1 { font-size: 56px; font-weight: bold; color: #f6f6f6; margin-bottom: 24px; line-height: 1.2; }
-        .hero-p { font-size: 18px; color: #a9a9ad; margin-bottom: 40px; font-weight: 300; }
+        .nav-links a:hover { color: #f59e0b; }
+        header { position: relative; min-height: calc(100vh - 80px); display: flex; align-items: center; justify-content: center; text-align: center; padding: 40px 20px; overflow: hidden; background-image: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.85)), url("https://unsplash.com"); background-size: cover; background-position: center; border-bottom: 1px solid rgba(181, 131, 42, 0.1); }
+        .hero-content { max-width: 800px; z-index: 10; background: transparent !important; }
+        .welcome { color: #f59e0b; letter-spacing: 4px; font-size: 14px; font-weight: 600; text-transform: uppercase; margin-bottom: 16px; }
+        h1 { font-size: 56px; font-weight: bold; color: #ffffff; margin-bottom: 24px; line-height: 1.2; }
+        .hero-p { font-size: 18px; color: #a1a1aa; margin-bottom: 40px; font-weight: 300; }
         .hero-btns { display: flex; gap: 16px; justify-content: center; }
-        .btn-gold { background: #b5832a; color: #0a0a0c; padding: 16px 36px; border-radius: 30px; font-weight: bold; }
+        .btn-gold { background: #b4832a; color: #0a0a0c; padding: 16px 36px; border-radius: 30px; font-weight: bold; }
         .btn-gold:hover { background: #cf9e38; }
         .btn-outline { border: 1px solid rgba(255,255,255,0.2); padding: 16px 36px; border-radius: 30px; font-weight: bold; background: rgba(255,255,255,0.02); }
         .btn-outline:hover { background: rgba(255,255,255,0.1); }
-
-        /* 區塊標準樣式 */
         section { padding: 100px 40px; max-width: 1200px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,0.05); }
         .section-title { text-align: center; margin-bottom: 60px; }
-        .section-title span { color: #cf9e38; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; font-weight: 600; }
-        .section-title h2 { font-size: 36px; color: #f6f6f6; margin-top: 8px; }
-
-        /* 品牌故事 */
+        .section-title span { color: #b4832a; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; font-weight: 600; }
+        .section-title h2 { font-size: 36px; color: #ffffff; margin-top: 8px; }
         .story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
-        .story-text h3 { font-size: 28px; color: #f6f6f6; margin-bottom: 20px; }
-        .story-text p { color: #a9a9ad; margin-bottom: 20px; font-weight: 300; }
+        .story-text h3 { font-size: 24px; color: #ffffff; margin-bottom: 20px; }
+        .story-text p { color: #a1a1aa; margin-bottom: 20px; font-weight: 300; }
         .story-img img { width: 100%; height: 400px; object-fit: cover; border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.5); border: 1px solid rgba(181, 131, 42, 0.2); }
-
-        /* 酒單 */
         .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; }
         .menu-item { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 20px; padding: 24px; transition: border 0.3s; }
         .menu-item:hover { border-color: rgba(181, 131, 42, 0.3); }
         .menu-img { width: 100%; height: 220px; object-fit: cover; border-radius: 12px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.05); }
-        .menu-meta { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px; }
-        .menu-meta h3 { font-size: 18px; color: #f6f6f6; }
-        .menu-meta .price { color: #cf9e38; font-weight: bold; }
-        .menu-desc { color: #7e7e83; font-size: 14px; font-weight: 300; }
-
-        /* 表單 */
-        form { max-width: 600px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px; }
-        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-        .form-group { display: flex; flex-direction: column; gap: 8px; }
-        label { font-size: 12px; color: #a9a9ad; text-transform: uppercase; letter-spacing: 1px; }
-        input, select, textarea { background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.08); padding: 14px; border-radius: 12px; color: #e7e7e8; font-size: 15px; }
-        input:focus, select:focus, textarea:focus { border-color: #b5832a; outline: none; }
-        .btn-submit { background: #b5832a; color: #0a0a0c; font-weight: bold; padding: 16px; border-radius: 12px; border: none; cursor: pointer; font-size: 16px; }
-        .btn-submit:hover { background: #cf9e38; }
-
-        /* 地圖區塊 */
-        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
-        .info-list { display: flex; flex-direction: column; gap: 24px; }
-        .info-item h4 { color: #e7e7e8; margin-bottom: 4px; }
-        .info-item p { color: #7e7e83; font-size: 14px; }
-        .map-container { width: 100%; height: 320px; border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); }
-
-        footer { text-align: center; padding: 60px 20px; color: #7e7e83; font-size: 13px; border-top: 1px solid rgba(255,255,255,0.05); background: #0a0a0c; }
     </style>
 </head>
 <body>
-
-    <!-- 導覽列 -->
     <nav>
-        <div class="logo">
-            <span style="font-size:24px;">🍸</span>
-            <span class="logo-text">NOCTURNE</span>
-        </div>
+        <div class="logo">🌙 NOCTURNE</div>
         <div class="nav-links">
             <a href="#">首頁</a>
             <a href="#story">品牌故事</a>
             <a href="#menu">特調酒單</a>
-            <a href="#reservation">線上訂位</a>
-            <a href="#contact">交通資訊</a>
-            <a href="#reservation" class="btn-reserve">立即預約</a>
+            <a href="#">線上訂位</a>
+            <a href="#">交通資訊</a>
+            <a href="#" class="btn-gold" style="padding: 10px 20px; border-radius: 20px;">立即預約</a>
         </div>
     </nav>
 
-    <!-- 主視覺廣告 -->
     <header>
         <div class="hero-content">
             <p class="welcome">Welcome to Nocturne</p>
             <h1>夜幕低垂，<br>點燃微醺靈魂</h1>
-            <p class="hero-p">在繁華都市的隱密角落，我們用手工調酒述說每滴故事。優雅、內斂、奢華，專屬於您的心靈避難所。</p>
+            <p class="hero-p">在繁華都市的隱密角落，我們用手工調酒訴說每滴故事。優雅、內斂、奢華，專屬於您的心靈避難所。</p>
             <div class="hero-btns">
                 <a href="#menu" class="btn-gold">探索特調酒單</a>
-                <a href="#reservation" class="btn-outline">預訂專屬座位</a>
+                <a href="#" class="btn-outline">預訂專屬座位</a>
             </div>
         </div>
     </header>
 
-    <!-- 品牌故事 -->
     <section id="story">
+        <div class="section-title">
+            <span>Our Story</span>
+            <h2>品牌故事</h2>
+        </div>
         <div class="story-grid">
             <div class="story-text">
-                <div style="margin-bottom:12px;"><span>The Philosophy</span></div>
-                <h3>關於「夜蘭」</h3>
-                <p>「夜蘭」取自深夜幽蘭之意。我們相信，一杯完美的調酒不僅僅是酒精的混合，更是調酒師與品飲者之間的無聲對話。在暗色調的奢華空間中，古典爵士樂低迴，讓您卸下一整天的疲憊。</p>
-                <p>每一款創作皆嚴選當季新鮮香草與自家浸泡烈酒，融匯古典調酒技法與現代分子料理概念，為您呈獻視覺與味覺的雙重極致盛宴。</p>
+                <h3>調酒，是一場關於時間與情感的實驗</h3>
+                <p>夜幕低垂之際，城市的喧囂逐漸褪去，取而代之的是靈魂深處的釋放。Nocturne 創立於繁華之中，旨在為渴望尋找平靜的都市人打造一個深夜的心靈避難所。</p>
+                <p>我們的調酒師如同風味的煉金術師，將在地素材與經典烈酒完美融合，調配出專屬於夜晚的微醺滋味。</p>
             </div>
             <div class="story-img">
-                <!-- 內建包裝的精緻高畫質調酒圖案程式碼，100% 絕對顯示成功 -->
-            <img src="https://unsplash.com" alt="Bartender Concept" class="w-full h-full object-cover rounded-lg">
-
+                <img src="https://unsplash.com" alt="Bartender Concept">
+            </div>
         </div>
     </section>
 
-    <!-- 特調酒單 -->
     <section id="menu">
         <div class="section-title">
-            <span>Curated Menu</span>
+            <span>Signature Cocktails</span>
             <h2>經典與主打特調</h2>
         </div>
         <div class="menu-grid">
             <div class="menu-item">
-                <!-- 內建圖案 1：馬丁尼杯 -->
-           <img src="https://unsplash.com" alt="Phantom Moon" class="w-full h-48 object-cover rounded-t-lg">
-
-                    <h3>月下幻影 Phantom Moon</h3>
-                    <span class="price">$450</span>
-                </div>
-                <p class="menu-desc">自家浸泡琴酒 / 澄清茉莉綠茶 / 白可可香甜酒 / 澄花水。口感乾淨優雅，帶有隱密的東方花香。</p>
+                <img src="https://unsplash.com" alt="Phantom Moon" class="menu-img">
+                <h3 style="font-size: 20px; color: #ffffff; margin-bottom: 8px;">月下幻影 Phantom Moon</h3>
+                <p style="color: #a1a1aa; font-size: 14px; font-weight: 300;">以琴酒為基底，注入微甜的紫羅蘭利口酒與清爽檸檬汁，杯緣輕抹特製鹽花。呈現如夢似幻的深夜紫色神祕感。</p>
             </div>
             <div class="menu-item">
-                <!-- 內建圖案 2：威士忌古典杯 -->
-              <img src="https://unsplash.com" alt="Smoke & Peat" class="w-full h-48 object-cover rounded-t-lg">
+                <img src="https://unsplash.com" alt="Smoke & Peat" class="menu-img">
+                <h3 style="font-size: 20px; color: #ffffff; margin-bottom: 8px;">煙草與泥煤 Smoke & Peat</h3>
+                <p style="color: #a1a1aa; font-size: 14px; font-weight: 300;">精選單一麥芽威士忌，搭配自製煙燻烏梅糖漿與苦精，出杯前以橡木煙燻注入杯中。專為熱愛醇厚泥煤風味的成熟靈魂設計。</p>
+            </div>
+        </div>
+    </section>
 
-                    <h3>煙草與泥煤 Smoke & Peat</h3>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js').catch(err => console.log('SW register failed:', err));
+            });
+        }
+    </script>
+</body>
+</html>
