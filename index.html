@@ -4,9 +4,79 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>夜間 Nocturne Bar</title>
+    <style>
+        /* 深夜酒吧風格 CSS 樣式 */
+        body {
+            background-color: #0a0a0c;
+            color: #fef08a;
+            font-family: 'Noto Serif TC', 'Georgia', serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+        .container {
+            padding: 20px;
+            max-width: 600px;
+        }
+        h1 {
+            font-size: 2.5rem;
+            color: #f5a623;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(245, 166, 35, 0.3);
+        }
+        .subtitle {
+            font-size: 1.1rem;
+            color: #a1a1aa;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+        .menu-section {
+            border-top: 1px solid #3f3f46;
+            border-bottom: 1px solid #3f3f46;
+            padding: 30px 0;
+            margin-bottom: 40px;
+        }
+        .menu-item {
+            margin: 15px 0;
+            font-size: 1.2rem;
+        }
+        .price {
+            color: #ca8a04;
+            margin-left: 10px;
+        }
+        .footer-info {
+            font-size: 0.9rem;
+            color: #71717a;
+            line-height: 1.6;
+        }
+    </style>
 </head>
 <body>
-    <h1>歡迎光臨夜間 Nocturne Bar</h1>
-    <p>網站正在建設中...</p>
+
+    <div class="container">
+        <h1>夜間 Nocturne Bar</h1>
+        <div class="subtitle">每個靈魂，都有一杯屬於他的夜色。</div>
+
+        <!-- 特色經典酒單 -->
+        <div class="menu-section">
+            <div class="menu-item">✦ 經典馬丁尼 <span class="price">$350</span></div>
+            <div class="menu-item">✦ 內格羅尼 <span class="price">$380</span></div>
+            <div class="menu-item">✦ 側車 Sidecar <span class="price">$400</span></div>
+            <div class="menu-item">✦ 威士忌酸酒 <span class="price">$360</span></div>
+        </div>
+
+        <!-- 底部營業資訊 -->
+        <div class="footer-info">
+            <p>營業時間：Mon - Sun 20:00 - 02:00</p>
+            <p>地址：深夜的某個沉靜角落</p>
+        </div>
+    </div>
+
 </body>
 </html>
