@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>夜間 Nocturne Bar</title>
     <style>
-        /* 深夜酒吧風格 CSS 樣式 */
+        /* 依據您的 gen_icons.py 參數完美調配的深夜酒吧風格 */
         body {
-            background-color: #0a0a0c;
-            color: #fef08a;
+            background-color: #0a0a0c; /* 完美同步您的 BG 參數 */
+            color: #ffdfaa;            /* 完美同步您的 BRASS_TOP 參數 */
             font-family: 'Noto Serif TC', 'Georgia', serif;
             margin: 0;
             padding: 0;
@@ -18,42 +18,71 @@
             justify-content: center;
             min-height: 100vh;
             text-align: center;
+            position: relative;
+            overflow: hidden;
         }
+
+        /* 模擬您的 GLOW 參數 (245, 158, 11) 的背景圓形發光特效 */
+        body::before {
+            content: "";
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(245, 158, 11, 0.15) 0%, rgba(0,0,0,0) 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
         .container {
+            position: relative;
+            z-index: 1;
             padding: 20px;
             max-width: 600px;
         }
+
         h1 {
-            font-size: 2.5rem;
-            color: #f5a623;
+            font-size: 2.8rem;
+            color: #c5a059; /* 完美同步您的 BRASS_MID 參數 */
             margin-bottom: 10px;
-            letter-spacing: 2px;
-            text-shadow: 0 0 10px rgba(245, 166, 35, 0.3);
+            letter-spacing: 4px;
+            text-shadow: 0 0 20px rgba(245, 158, 11, 0.4);
         }
+
         .subtitle {
             font-size: 1.1rem;
-            color: #a1a1aa;
-            margin-bottom: 40px;
+            color: #8a6a2c; /* 完美同步您的 BRASS_BOT 參數 */
+            margin-bottom: 50px;
             font-style: italic;
+            letter-spacing: 1px;
         }
+
         .menu-section {
-            border-top: 1px solid #3f3f46;
-            border-bottom: 1px solid #3f3f46;
-            padding: 30px 0;
-            margin-bottom: 40px;
+            border-top: 1px solid rgba(138, 106, 44, 0.3);
+            border-bottom: 1px solid rgba(138, 106, 44, 0.3);
+            padding: 35px 0;
+            margin-bottom: 50px;
         }
+
         .menu-item {
-            margin: 15px 0;
-            font-size: 1.2rem;
+            margin: 20px 0;
+            font-size: 1.25rem;
+            letter-spacing: 1px;
         }
+
         .price {
-            color: #ca8a04;
-            margin-left: 10px;
+            color: #c5a059;
+            margin-left: 15px;
+            font-family: 'Georgia', serif;
         }
+
         .footer-info {
-            font-size: 0.9rem;
-            color: #71717a;
-            line-height: 1.6;
+            font-size: 0.95rem;
+            color: rgba(255, 223, 170, 0.5);
+            line-height: 1.8;
+            letter-spacing: 1px;
         }
     </style>
 </head>
